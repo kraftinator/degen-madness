@@ -25,8 +25,16 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         require(pauseMinting == false, "Minting is currently paused");
         require(block.timestamp < mintDeadline, "Minting period has ended");
         require(totalSupply < maxSupply, "Max supply reached");
+        validateBracket(games);
 
-        // Validate bracket
+        totalSupply += 1; // Increment the total supply
+        uint256 tokenId = totalSupply; // Use totalSupply as the new tokenId
+
+        _safeMint(msg.sender, tokenId);
+        tokenBrackets[tokenId] = Brackets(games);
+    }
+
+    function validateBracket(uint256[7] calldata games) internal pure {
         // First Round
         require(games[0] == 0 || games[0] == 1, "Invalid winner for game 1");
         require(games[1] == 2 || games[1] == 3, "Invalid winner for game 2");
@@ -37,12 +45,6 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         require(games[5] == games[2] || games[5] == games[3], "Invalid winner for semifinal 2");
         // Championship
         require(games[6] == games[4] || games[6] == games[5], "Invalid winner for the final");
-
-        totalSupply += 1; // Increment the total supply
-        uint256 tokenId = totalSupply; // Use totalSupply as the new tokenId
-
-        _safeMint(msg.sender, tokenId);
-        tokenBrackets[tokenId] = Brackets(games);
     }
 
     function getBracket(uint256 tokenId) public view returns (Brackets memory) {
