@@ -1,0 +1,34 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Rectangles for Team Labels -->
+    <rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="5" y="238" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="5" y="262" width="140" height="24" fill="lightgrey" stroke="black"/>
+    
+    <!-- Rectangles for Semifinal Winners -->
+    <rect x="210" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="210" y="166" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+    <!-- Rectangle for Champion -->
+    <rect x="385" y="153" width="140" height="24" fill="lightgray" stroke="black"/>
+
+    <!-- Paths for Semifinals to Winners -->
+    <path d="M 145,62 H 175 V 166 H 209" stroke="black" stroke-width="2" fill="none"/>
+    <path d="M 145,262 H 175 V 166 H 209" stroke="black" stroke-width="2" fill="none"/>
+    
+    <!-- Line for Final -->
+    <line x1="350" y1="166" x2="384" y2="166" stroke="black" stroke-width="2"/>
+    
+    <!-- Team Labels for Semifinals -->
+    <text x="10" y="57" font-family="Arial" font-size="16">Kansas</text>
+    <text x="10" y="81" font-family="Arial" font-size="16">Oregon</text>
+    <text x="10" y="257" font-family="Arial" font-size="16">Iowa</text>
+    <text x="10" y="281" font-family="Arial" font-size="16">Florida</text>
+    
+    <!-- Winners of Semifinals going to Final -->
+    <text x="215" y="160" font-family="Arial" font-size="16">Oregon</text>
+    <text x="215" y="184" font-family="Arial" font-size="16">Iowa</text>
+    
+    <!-- Champion -->
+    <text x="390" y="171" font-family="Arial" font-size="16">Oregon</text>
+</svg>
