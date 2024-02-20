@@ -1,34 +1,65 @@
-<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">
+    <!-- Round 1 -->
     <!-- Rectangles for Team Labels -->
     <rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>
     <rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="5" y="238" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="5" y="262" width="140" height="24" fill="lightgrey" stroke="black"/>
-    
-    <!-- Rectangles for Semifinal Winners -->
-    <rect x="210" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="210" y="166" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <!-- Reduced Spacing between Oregon and Iowa -->
+    <rect x="5" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="5" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <!-- Reduced Spacing between Florida and Gonzaga -->
+    <rect x="5" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="5" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <!-- Reduced Spacing between Portland St and Pittsburgh -->
+    <rect x="5" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="5" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>
 
-    <!-- Rectangle for Champion -->
-    <rect x="385" y="153" width="140" height="24" fill="lightgray" stroke="black"/>
-
-    <!-- Paths for Semifinals to Winners -->
-    <path d="M 145,62 H 175 V 166 H 209" stroke="black" stroke-width="2" fill="none"/>
-    <path d="M 145,262 H 175 V 166 H 209" stroke="black" stroke-width="2" fill="none"/>
-    
-    <!-- Line for Final -->
-    <line x1="350" y1="166" x2="384" y2="166" stroke="black" stroke-width="2"/>
-    
-    <!-- Team Labels for Semifinals -->
+    <!-- Team Labels -->
     <text x="10" y="57" font-family="Arial" font-size="16">Kansas</text>
     <text x="10" y="81" font-family="Arial" font-size="16">Oregon</text>
-    <text x="10" y="257" font-family="Arial" font-size="16">Iowa</text>
-    <text x="10" y="281" font-family="Arial" font-size="16">Florida</text>
-    
+    <text x="10" y="117" font-family="Arial" font-size="16">Iowa</text>
+    <text x="10" y="141" font-family="Arial" font-size="16">Florida</text>
+    <text x="10" y="177" font-family="Arial" font-size="16">Gonzaga</text>
+    <text x="10" y="201" font-family="Arial" font-size="16">Pittsburgh</text>
+    <text x="10" y="237" font-family="Arial" font-size="16">Portland St</text>
+    <text x="10" y="261" font-family="Arial" font-size="16">UCLA</text>
+
+    <!-- Round 2 -->
+    <!-- Rectangles for Round 1 Winners -->
+    <rect x="210" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>
     <!-- Winners of Semifinals going to Final -->
-    <text x="215" y="160" font-family="Arial" font-size="16">Oregon</text>
-    <text x="215" y="184" font-family="Arial" font-size="16">Iowa</text>
+    <text x="215" y="86" font-family="Arial" font-size="16">Oregon</text>
+    <text x="215" y="110" font-family="Arial" font-size="16">Iowa</text>
     
-    <!-- Champion -->
-    <text x="390" y="171" font-family="Arial" font-size="16">Oregon</text>
+    <!-- Additional Rectangles for Gonzaga and UCLA Winners -->
+    <rect x="210" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="210" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <!-- Winners of Round 1 going to Semifinals -->
+    <text x="215" y="206" font-family="Arial" font-size="16">Gonzaga</text>
+    <text x="215" y="230" font-family="Arial" font-size="16">UCLA</text>
+
+    <!-- Paths for Semifinals to Winners -->
+    <path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>
+    <path d="M 145,122 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>
+    <!-- Additional Paths for Gonzaga and UCLA to Winners -->
+    <path d="M 145,182 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>
+    <path d="M 145,242 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>
+
+    <!-- Round 3 -->
+    <!-- Rectangles for Round 2 Winners, adjusted for vertical centering -->
+    <rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <rect x="415" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+    <!-- Winners of Round 3 -->
+    <text x="420" y="148" font-family="Arial" font-size="16">Oregon</text>
+    <text x="420" y="172" font-family="Arial" font-size="16">UCLA</text>
+
+    <path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>
+    <path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>
+
+  <rect x="630" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <text x="635" y="160" font-family="Arial" font-size="16">Oregon</text>
+  <line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/>
+
 </svg>
+
