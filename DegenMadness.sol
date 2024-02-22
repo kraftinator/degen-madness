@@ -73,15 +73,64 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     }
 
     function tokenURI(uint256 tokenId) override public pure returns (string memory) {
-        string[3] memory parts;
-  
-        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
 
-        parts[1] = 'Hello, world!';
+        //string[3] memory parts;
+        //parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
+        //parts[1] = 'Hello, world!';
+        //parts[2] = '</text></svg>';
+        //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
 
-        parts[2] = '</text></svg>';
+        string[] memory parts = new string[](38);
 
-        string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
+        parts[0] = '<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">';
+        parts[1] = '<rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[2] = '<rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[3] = '<rect x="5" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[4] = '<rect x="5" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[5] = '<rect x="5" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[6] = '<rect x="5" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[7] = '<rect x="5" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[8] = '<rect x="5" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[9] = '<text x="10" y="57" font-family="Arial" font-size="16">Kansas</text>';
+        parts[10] = '<text x="10" y="81" font-family="Arial" font-size="16">Oregon</text>';
+        parts[11] = '<text x="10" y="117" font-family="Arial" font-size="16">Iowa</text>';
+        parts[12] = '<text x="10" y="141" font-family="Arial" font-size="16">Florida</text>';
+        parts[13] = '<text x="10" y="177" font-family="Arial" font-size="16">Gonzaga</text>';
+        parts[14] = '<text x="10" y="201" font-family="Arial" font-size="16">Pittsburgh</text>';
+        parts[15] = '<text x="10" y="237" font-family="Arial" font-size="16">Portland St</text>';
+        parts[16] = '<text x="10" y="261" font-family="Arial" font-size="16">UCLA</text>';
+        parts[17] = '<rect x="210" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[18] = '<rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[19] = '<text x="215" y="86" font-family="Arial" font-size="16">Oregon</text>';
+        parts[20] = '<text x="215" y="110" font-family="Arial" font-size="16">Iowa</text>';
+        parts[21] = '<rect x="210" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[22] = '<rect x="210" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[23] = '<text x="215" y="206" font-family="Arial" font-size="16">Gonzaga</text>';
+        parts[24] = '<text x="215" y="230" font-family="Arial" font-size="16">UCLA</text>';
+        parts[25] = '<path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[26] = '<path d="M 145,122 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[27] = '<path d="M 145,182 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[28] = '<path d="M 145,242 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[29] = '<rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[30] = '<rect x="415" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[31] = '<text x="420" y="148" font-family="Arial" font-size="16">Oregon</text>';
+        parts[32] = '<text x="420" y="172" font-family="Arial" font-size="16">UCLA</text>';
+        parts[33] = '<path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
+        parts[34] = '<path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
+        parts[35] = '<rect x="630" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[36] = '<text x="635" y="160" font-family="Arial" font-size="16">Oregon</text>';
+        parts[37] = '<line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/></svg>';
+
+        bytes memory svgBytes;
+        for (uint i = 0; i < parts.length; i++) {
+            svgBytes = abi.encodePacked(svgBytes, parts[i]);
+        }
+        //return string(svgBytes);
+
+
+        //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
+        //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
+        string memory output = string(svgBytes);
 
         string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', toString(tokenId), '", "description": "Loot is randomized adventurer gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret. Feel free to use Loot in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
