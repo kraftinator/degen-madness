@@ -13,7 +13,11 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     constructor(address initialOwner)
         ERC721("Degen Madness", "DMAD")
         Ownable(initialOwner)
-    {}
+    {
+        for(uint256 i = 0; i < winners.length; i++) {
+            winners[i] = NULL;
+        }
+    }
 
     struct Brackets {
         uint256[7] games;
@@ -35,6 +39,9 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         "Portland St",
         "UCLA"
     ];
+
+    uint256[63] private winners;
+    uint256 private constant NULL = type(uint256).max;
 
     function mintBracket(uint256[7] calldata games) external nonReentrant {
         require(pauseMinting == false, "Minting is currently paused");
@@ -67,6 +74,17 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         return tokenBrackets[tokenId];
     }
 
+    // Make private
+    function setWinner(uint256 index, uint256 winnerId) external onlyOwner {
+        require(index < winners.length, "Index out of bounds.");
+        winners[index] = winnerId;
+    }
+
+    function getWinner(uint256 index) public view returns (uint256) {
+        require(index < winners.length, "Index out of bounds.");
+        return winners[index];
+    }
+
     function setMintDeadline(uint256 _newDeadline) external onlyOwner {
         mintDeadline = _newDeadline;
     }
@@ -81,6 +99,16 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
     function disableMinting() public onlyOwner {
         pauseMinting = true;
+    }
+
+    function getFillColor(uint256 pick, uint256 index) public view returns (string memory) {
+        if (winners[index] == NULL) {
+            return "lightgray";
+        } 
+        if (winners[index] == pick) {
+            return "lightgreen";
+        }
+        return "pink";
     }
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
@@ -116,7 +144,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         parts[17] = string.concat('<text x="10" y="261">', teams[7], '</text>'); // UCLA
 
         // Continuing with the rest of the SVG parts
-        parts[18] = '<rect x="210" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[18] = string.concat('<rect x="210" y="68" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[0], 0), '"/>');
         parts[19] = '<rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>';
         parts[20] = string.concat('<text x="215" y="86">', teams[bracket.games[0]], '</text>'); // Oregon (Round 2)
         parts[21] = string.concat('<text x="215" y="110">', teams[bracket.games[1]], '</text>'); // Iowa (Round 2)
@@ -158,6 +186,8 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         return output;
     }
+
+
 
     function toString(uint256 value) internal pure returns (string memory) {
     // Inspired by OraclizeAPI's implementation - MIT license
