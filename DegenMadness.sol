@@ -25,6 +25,17 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     uint256 public maxSupply = 5;
     uint256 public mintDeadline = 1710651600; // Midnight March 17, 2024 Central Daylight Time
 
+    string[] private teams = [
+        "Kansas",
+        "Oregon St",
+        "Iowa",
+        "Florida",
+        "Gonzaga",
+        "Pittsburgh",
+        "Portland St",
+        "UCLA"
+    ];
+
     function mintBracket(uint256[7] calldata games) external nonReentrant {
         require(pauseMinting == false, "Minting is currently paused");
         require(block.timestamp < mintDeadline, "Minting period has ended");
@@ -72,7 +83,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         pauseMinting = true;
     }
 
-    function tokenURI(uint256 tokenId) override public pure returns (string memory) {
+    function tokenURI(uint256 tokenId) override public view returns (string memory) {
 
         //string[3] memory parts;
         //parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
@@ -80,46 +91,56 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         //parts[2] = '</text></svg>';
         //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
 
-        string[] memory parts = new string[](38);
+        Brackets storage bracket = tokenBrackets[tokenId];
+        string[] memory parts = new string[](40);
 
         parts[0] = '<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">';
-        parts[1] = '<rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[2] = '<rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[3] = '<rect x="5" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[4] = '<rect x="5" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[5] = '<rect x="5" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[6] = '<rect x="5" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[7] = '<rect x="5" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[8] = '<rect x="5" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[9] = '<text x="10" y="57" font-family="Arial" font-size="16">Kansas</text>';
-        parts[10] = '<text x="10" y="81" font-family="Arial" font-size="16">Oregon</text>';
-        parts[11] = '<text x="10" y="117" font-family="Arial" font-size="16">Iowa</text>';
-        parts[12] = '<text x="10" y="141" font-family="Arial" font-size="16">Florida</text>';
-        parts[13] = '<text x="10" y="177" font-family="Arial" font-size="16">Gonzaga</text>';
-        parts[14] = '<text x="10" y="201" font-family="Arial" font-size="16">Pittsburgh</text>';
-        parts[15] = '<text x="10" y="237" font-family="Arial" font-size="16">Portland St</text>';
-        parts[16] = '<text x="10" y="261" font-family="Arial" font-size="16">UCLA</text>';
-        parts[17] = '<rect x="210" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[18] = '<rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[19] = '<text x="215" y="86" font-family="Arial" font-size="16">Oregon</text>';
-        parts[20] = '<text x="215" y="110" font-family="Arial" font-size="16">Iowa</text>';
-        parts[21] = '<rect x="210" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[22] = '<rect x="210" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[23] = '<text x="215" y="206" font-family="Arial" font-size="16">Gonzaga</text>';
-        parts[24] = '<text x="215" y="230" font-family="Arial" font-size="16">UCLA</text>';
-        parts[25] = '<path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
-        parts[26] = '<path d="M 145,122 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
-        parts[27] = '<path d="M 145,182 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
-        parts[28] = '<path d="M 145,242 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
-        parts[29] = '<rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[30] = '<rect x="415" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[31] = '<text x="420" y="148" font-family="Arial" font-size="16">Oregon</text>';
-        parts[32] = '<text x="420" y="172" font-family="Arial" font-size="16">UCLA</text>';
-        parts[33] = '<path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
-        parts[34] = '<path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
-        parts[35] = '<rect x="630" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[36] = '<text x="635" y="160" font-family="Arial" font-size="16">Oregon</text>';
-        parts[37] = '<line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/></svg>';
+        parts[1] = '<style>text { font-family: \'Arial\', sans-serif; font-size: 16px; }</style>';
+        parts[2] = '<rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[3] = '<rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[4] = '<rect x="5" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[5] = '<rect x="5" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[6] = '<rect x="5" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[7] = '<rect x="5" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[8] = '<rect x="5" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[9] = '<rect x="5" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>';
+
+        // Dynamically setting team names using the teams array
+        parts[10] = string.concat('<text x="10" y="57">', teams[0], '</text>'); // Kansas
+        parts[11] = string.concat('<text x="10" y="81">', teams[1], '</text>'); // Oregon
+        parts[12] = string.concat('<text x="10" y="117">', teams[2], '</text>'); // Iowa
+        parts[13] = string.concat('<text x="10" y="141">', teams[3], '</text>'); // Florida
+        parts[14] = string.concat('<text x="10" y="177">', teams[4], '</text>'); // Gonzaga
+        parts[15] = string.concat('<text x="10" y="201">', teams[5], '</text>'); // Pittsburgh
+        parts[16] = string.concat('<text x="10" y="237">', teams[6], '</text>'); // Portland St
+        parts[17] = string.concat('<text x="10" y="261">', teams[7], '</text>'); // UCLA
+
+        // Continuing with the rest of the SVG parts
+        parts[18] = '<rect x="210" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[19] = '<rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[20] = string.concat('<text x="215" y="86">', teams[bracket.games[0]], '</text>'); // Oregon (Round 2)
+        parts[21] = string.concat('<text x="215" y="110">', teams[bracket.games[1]], '</text>'); // Iowa (Round 2)
+        parts[22] = '<rect x="210" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[23] = '<rect x="210" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[24] = string.concat('<text x="215" y="206">', teams[bracket.games[2]], '</text>'); // Gonzaga (Round 2)
+        parts[25] = string.concat('<text x="215" y="230">', teams[bracket.games[3]], '</text>'); // UCLA (Round 2)
+        // The rest of the parts are unchanged and do not include team names
+        parts[26] = '<path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[27] = '<path d="M 145,122 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[28] = '<path d="M 145,182 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[29] = '<path d="M 145,242 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
+        parts[30] = '<rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[31] = '<rect x="415" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[32] = string.concat('<text x="420" y="148">', teams[bracket.games[4]], '</text>'); // Oregon (Semi-Finals)
+        parts[33] = string.concat('<text x="420" y="172">', teams[bracket.games[5]], '</text>'); // UCLA (Semi-Finals)
+        parts[34] = '<path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
+        parts[35] = '<path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
+        parts[36] = '<rect x="630" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[37] = string.concat('<text x="635" y="160">', teams[bracket.games[6]], '</text>'); // Oregon (Final)
+        parts[38] = '<line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/>';
+        parts[39] = '</svg>';
+
+
 
         bytes memory svgBytes;
         for (uint i = 0; i < parts.length; i++) {
