@@ -20,7 +20,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     }
 
     struct Brackets {
-        uint256[7] games;
+        uint8[7] games;
     }
 
     mapping(uint256 => Brackets) private tokenBrackets;
@@ -40,10 +40,10 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         "UCLA"
     ];
 
-    uint256[63] private winners;
+    uint256[7] private winners;
     uint256 private constant NULL = type(uint256).max;
 
-    function mintBracket(uint256[7] calldata games) external nonReentrant {
+    function mintBracket(uint8[7] calldata games) external nonReentrant {
         require(pauseMinting == false, "Minting is currently paused");
         require(block.timestamp < mintDeadline, "Minting period has ended");
         require(totalSupply < maxSupply, "Max supply reached");
@@ -56,7 +56,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         tokenBrackets[tokenId] = Brackets(games);
     }
 
-    function validateBracket(uint256[7] calldata games) internal pure {
+    function validateBracket(uint8[7] calldata games) internal pure {
         // First Round
         require(games[0] == 0 || games[0] == 1, "Invalid winner for game 1");
         require(games[1] == 2 || games[1] == 3, "Invalid winner for game 2");
@@ -80,6 +80,19 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         winners[index] = winnerId;
     }
 
+    // Make private
+    function setWinners(uint256[7] calldata newWinners) external onlyOwner {
+        winners = newWinners;
+    }
+
+    function getWinners() public view returns (uint256[] memory) {
+        uint256[] memory copyWinners = new uint256[](winners.length);
+        for (uint256 i = 0; i < winners.length; i++) {
+            copyWinners[i] = winners[i];
+        }
+        return copyWinners;
+    }
+
     function getWinner(uint256 index) public view returns (uint256) {
         require(index < winners.length, "Index out of bounds.");
         return winners[index];
@@ -101,8 +114,55 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         pauseMinting = true;
     }
 
-    function getFillColor(uint256 pick, uint256 index) public view returns (string memory) {
+    function getScore(uint256 tokenId) public view returns (uint256) {
+        Brackets storage bracket = tokenBrackets[tokenId];
+        uint256 score = 0;
+        for (uint256 i = 0; i < winners.length; i++) {
+            // Round 1
+            if (i <= 3) {
+                if (winners[i] == bracket.games[i]) {
+                    score += 1;
+                }
+            }
+            // Round 2
+            if (i >= 4 && i <= 5) {
+                if (winners[i] == bracket.games[i]) {
+                    score += 2;
+                }
+            }
+            // Final
+            if (i == 6) {
+                if (winners[i] == bracket.games[i]) {
+                    score += 4;
+                }
+            }
+        }
+        return score;
+    }
+
+    function isEliminated(uint8 pick) public view returns (bool) {
+        // Round 1
+        uint8 firstGame = uint8(pick / 2);
+        if (winners[firstGame] == NULL) {
+            return false;
+        }
+        // Round 2
+        uint8 secondGame = uint8((pick / 4) + (teams.length / 2));
+        if (winners[firstGame] == pick && winners[secondGame] == NULL) {
+            return false;
+        }
+        // Final
+        if (winners[firstGame] == pick && winners[secondGame] == pick && winners[6] == NULL) {
+            return false;
+        }
+        return true;
+    }
+
+    function getFillColor(uint8 pick, uint256 index) public view returns (string memory) {
         if (winners[index] == NULL) {
+            if (isEliminated(pick)) {
+                return "pink";
+            }
             return "lightgray";
         } 
         if (winners[index] == pick) {
@@ -143,45 +203,65 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         parts[16] = string.concat('<text x="10" y="237">', teams[6], '</text>'); // Portland St
         parts[17] = string.concat('<text x="10" y="261">', teams[7], '</text>'); // UCLA
 
-        // Continuing with the rest of the SVG parts
+        // 2nd Round
+        // Game 0 Winner
         parts[18] = string.concat('<rect x="210" y="68" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[0], 0), '"/>');
-        parts[19] = '<rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[20] = string.concat('<text x="215" y="86">', teams[bracket.games[0]], '</text>'); // Oregon (Round 2)
-        parts[21] = string.concat('<text x="215" y="110">', teams[bracket.games[1]], '</text>'); // Iowa (Round 2)
-        parts[22] = '<rect x="210" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[23] = '<rect x="210" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[24] = string.concat('<text x="215" y="206">', teams[bracket.games[2]], '</text>'); // Gonzaga (Round 2)
-        parts[25] = string.concat('<text x="215" y="230">', teams[bracket.games[3]], '</text>'); // UCLA (Round 2)
-        // The rest of the parts are unchanged and do not include team names
+        parts[19] = string.concat('<text x="215" y="86">', teams[bracket.games[0]], '</text>');
+        
+        // Game 1 Winner
+        parts[20] = string.concat('<rect x="210" y="92" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[1], 1), '"/>');
+        parts[21] = string.concat('<text x="215" y="110">', teams[bracket.games[1]], '</text>'); 
+
+        // Game 2 Winner
+        parts[22] = string.concat('<rect x="210" y="188" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[2], 2), '"/>');
+        parts[23] = string.concat('<text x="215" y="206">', teams[bracket.games[2]], '</text>'); 
+
+        // Game 3 Winner
+        parts[24] = string.concat('<rect x="210" y="212" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[3], 3), '"/>');
+        parts[25] = string.concat('<text x="215" y="230">', teams[bracket.games[3]], '</text>'); 
+
         parts[26] = '<path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
         parts[27] = '<path d="M 145,122 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
         parts[28] = '<path d="M 145,182 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
         parts[29] = '<path d="M 145,242 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>';
-        parts[30] = '<rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[31] = '<rect x="415" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[32] = string.concat('<text x="420" y="148">', teams[bracket.games[4]], '</text>'); // Oregon (Semi-Finals)
-        parts[33] = string.concat('<text x="420" y="172">', teams[bracket.games[5]], '</text>'); // UCLA (Semi-Finals)
+
+        // 3rd Round
+        // Game 4 Winner
+        //parts[30] = '<rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[30] = string.concat('<rect x="415" y="130" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[4], 4), '"/>');
+        parts[31] = string.concat('<text x="420" y="148">', teams[bracket.games[4]], '</text>');
+        
+        // Game 5 Winner
+        parts[32] = string.concat('<rect x="415" y="154" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[5], 5), '"/>');
+        parts[33] = string.concat('<text x="420" y="172">', teams[bracket.games[5]], '</text>');
+        
         parts[34] = '<path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
         parts[35] = '<path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
-        parts[36] = '<rect x="630" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>';
+
+        // Game 6 Winner
+        parts[36] = string.concat('<rect x="630" y="142" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[6], 6), '"/>');
         parts[37] = string.concat('<text x="635" y="160">', teams[bracket.games[6]], '</text>'); // Oregon (Final)
+        
         parts[38] = '<line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/>';
         parts[39] = '</svg>';
 
+       //bytes memory svgBytes;
+        //for (uint i = 0; i < parts.length; i++) {
+        //    svgBytes = abi.encodePacked(svgBytes, parts[i]);
+        //}
 
-
-        bytes memory svgBytes;
+        string memory svgBytes;
         for (uint i = 0; i < parts.length; i++) {
-            svgBytes = abi.encodePacked(svgBytes, parts[i]);
+            svgBytes = string.concat(svgBytes, parts[i]);
         }
         //return string(svgBytes);
 
 
         //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
-        //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
+
         string memory output = string(svgBytes);
 
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', toString(tokenId), '", "description": "Loot is randomized adventurer gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret. Feel free to use Loot in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', toString(tokenId), '", "description": "Degen Madness!", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
