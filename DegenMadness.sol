@@ -114,27 +114,31 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         pauseMinting = true;
     }
 
+    function getRankings() public view returns (uint256[] memory, uint256[] memory) {
+        uint256[] memory tokenIds = new uint256[](totalSupply);
+        uint256[] memory scores = new uint256[](totalSupply);
+
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            tokenIds[i - 1] = tokenId;
+            scores[i - 1] = getScore(tokenId);
+        }
+
+        return (tokenIds, scores);
+    }
+
     function getScore(uint256 tokenId) public view returns (uint256) {
         Brackets storage bracket = tokenBrackets[tokenId];
         uint256 score = 0;
         for (uint256 i = 0; i < winners.length; i++) {
-            // Round 1
-            if (i <= 3) {
-                if (winners[i] == bracket.games[i]) {
+            if (winners[i] == bracket.games[i]) {
+                if (i <= 3) { 
                     score += 1;
-                }
-            }
-            // Round 2
-            if (i >= 4 && i <= 5) {
-                if (winners[i] == bracket.games[i]) {
+                } else if (i <= 5) { 
                     score += 2;
-                }
-            }
-            // Final
-            if (i == 6) {
-                if (winners[i] == bracket.games[i]) {
+                } else { 
                     score += 4;
-                }
+                }    
             }
         }
         return score;
@@ -172,13 +176,6 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     }
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
-
-        //string[3] memory parts;
-        //parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
-        //parts[1] = 'Hello, world!';
-        //parts[2] = '</text></svg>';
-        //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
-
         Brackets storage bracket = tokenBrackets[tokenId];
         string[] memory parts = new string[](40);
 
@@ -245,29 +242,17 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         parts[38] = '<line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/>';
         parts[39] = '</svg>';
 
-       //bytes memory svgBytes;
-        //for (uint i = 0; i < parts.length; i++) {
-        //    svgBytes = abi.encodePacked(svgBytes, parts[i]);
-        //}
-
         string memory svgBytes;
         for (uint i = 0; i < parts.length; i++) {
             svgBytes = string.concat(svgBytes, parts[i]);
         }
-        //return string(svgBytes);
-
-
-        //string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2]));
 
         string memory output = string(svgBytes);
-
         string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', toString(tokenId), '", "description": "Degen Madness!", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
     }
-
-
 
     function toString(uint256 value) internal pure returns (string memory) {
     // Inspired by OraclizeAPI's implementation - MIT license
