@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     using Strings for uint256;
+    using StringUtils for uint256;
 
     constructor(address initialOwner)
         ERC721("Degen Madness", "DMAD")
@@ -132,6 +133,77 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         return (tokenIds, scores);
     }
+/*
+    function getHighestScoreBracket() public view returns (uint256, uint256) {
+        require(totalSupply > 0, "No brackets minted yet");
+
+        uint256 highestScore = 0;
+        uint256 highestScoreTokenId;
+
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score > highestScore) {
+                highestScore = score;
+                highestScoreTokenId = tokenId;
+            }
+        }
+
+        return (highestScoreTokenId, highestScore);
+    }
+
+
+    function getHighestScoreBrackets() public view returns (uint256[] memory, uint256) {
+        require(totalSupply > 0, "No brackets minted yet");
+
+        uint256 highestScore = 0;
+        uint256[] memory highestScoreTokenIds;
+        uint256 count = 0;
+
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score > highestScore) {
+                highestScore = score;
+                delete highestScoreTokenIds;
+                highestScoreTokenIds = new uint256[](totalSupply); // Reset array
+                highestScoreTokenIds[count++] = tokenId;
+            } else if (score == highestScore) {
+                highestScoreTokenIds[count++] = tokenId;
+            }
+        }
+
+        return (highestScoreTokenIds, highestScore);
+    }
+*/
+
+    function getHighestScoreBrackets() public view returns (uint256[] memory, uint256) {
+        require(totalSupply > 0, "No brackets minted yet");
+
+        uint256 highestScore = 0;
+        uint256[] memory highestScoreTokenIds = new uint256[](totalSupply); // Initialize with maximum possible size
+        uint256 count = 0;
+
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score > highestScore) {
+                highestScore = score;
+                count = 0; // Reset count for new highest score
+                highestScoreTokenIds[count++] = tokenId;
+            } else if (score == highestScore) {
+                highestScoreTokenIds[count++] = tokenId;
+            }
+        }
+
+        // Trim array to remove any unused elements
+        uint256[] memory trimmedTokenIds = new uint256[](count);
+        for (uint256 i = 0; i < count; i++) {
+            trimmedTokenIds[i] = highestScoreTokenIds[i];
+        }
+
+        return (trimmedTokenIds, highestScore);
+    }
 
     function getScore(uint256 tokenId) public view returns (uint256) {
         Brackets storage bracket = tokenBrackets[tokenId];
@@ -252,20 +324,22 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         }
 
         string memory output = string(svgBytes);
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', toString(tokenId), '", "description": "Degen Madness!", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', StringUtils.toString(tokenId), '", "description": "Degen Madness!", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
     }
 
     function getRectangle(uint x, uint y, string memory fill) internal pure returns (string memory) {
-        return string(abi.encodePacked('<rect x="', x.toString(), '" y="', y.toString(), '" width="140" height="24" stroke="black" fill="', fill, '"/>'));
+        return string(abi.encodePacked('<rect x="', StringUtils.toString(x), '" y="', StringUtils.toString(y), '" width="140" height="24" stroke="black" fill="', fill, '"/>'));
     }
 
+}
 
+library StringUtils {
     function toString(uint256 value) internal pure returns (string memory) {
-    // Inspired by OraclizeAPI's implementation - MIT license
-    // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
+        // Inspired by OraclizeAPI's implementation - MIT license
+        // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
 
         if (value == 0) {
             return "0";
