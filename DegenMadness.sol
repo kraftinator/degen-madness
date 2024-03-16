@@ -42,8 +42,10 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
     uint256[7] private winners;
     uint256 private constant NULL = type(uint256).max;
+    uint256 public mintFee = 0.01 ether;
 
-    function mintBracket(uint8[7] calldata games) external nonReentrant {
+    function mintBracket(uint8[7] calldata games) external nonReentrant payable {
+        require(msg.value >= mintFee, "Insufficient payment"); // Check if the caller sent enough ether
         require(pauseMinting == false, "Minting is currently paused");
         require(block.timestamp < mintDeadline, "Minting period has ended");
         require(totalSupply < maxSupply, "Max supply reached");
@@ -54,6 +56,10 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         _safeMint(msg.sender, tokenId);
         tokenBrackets[tokenId] = Brackets(games);
+    }
+
+    function withdrawMintFees() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
     }
 
     function validateBracket(uint8[7] calldata games) internal pure {
@@ -181,40 +187,39 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         parts[0] = '<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">';
         parts[1] = '<style>text { font-family: \'Arial\', sans-serif; font-size: 16px; }</style>';
-        parts[2] = '<rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[3] = '<rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[4] = '<rect x="5" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[5] = '<rect x="5" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[6] = '<rect x="5" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[7] = '<rect x="5" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[8] = '<rect x="5" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[9] = '<rect x="5" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>';
+        parts[2] = getRectangle(5, 38, "lightgrey");
+        parts[3] = getRectangle(5, 62, "lightgrey");
+        parts[4] = getRectangle(5, 98, "lightgrey");
+        parts[5] = getRectangle(5, 122, "lightgrey");
+        parts[6] = getRectangle(5, 158, "lightgrey");
+        parts[7] = getRectangle(5, 182, "lightgrey");
+        parts[8] = getRectangle(5, 218, "lightgrey");
+        parts[9] = getRectangle(5, 242, "lightgrey");
 
-        // Dynamically setting team names using the teams array
-        parts[10] = string.concat('<text x="10" y="57">', teams[0], '</text>'); // Kansas
-        parts[11] = string.concat('<text x="10" y="81">', teams[1], '</text>'); // Oregon
-        parts[12] = string.concat('<text x="10" y="117">', teams[2], '</text>'); // Iowa
-        parts[13] = string.concat('<text x="10" y="141">', teams[3], '</text>'); // Florida
-        parts[14] = string.concat('<text x="10" y="177">', teams[4], '</text>'); // Gonzaga
-        parts[15] = string.concat('<text x="10" y="201">', teams[5], '</text>'); // Pittsburgh
-        parts[16] = string.concat('<text x="10" y="237">', teams[6], '</text>'); // Portland St
-        parts[17] = string.concat('<text x="10" y="261">', teams[7], '</text>'); // UCLA
+        parts[10] = string.concat('<text x="10" y="57">', teams[0], '</text>'); 
+        parts[11] = string.concat('<text x="10" y="81">', teams[1], '</text>'); 
+        parts[12] = string.concat('<text x="10" y="117">', teams[2], '</text>');
+        parts[13] = string.concat('<text x="10" y="141">', teams[3], '</text>');
+        parts[14] = string.concat('<text x="10" y="177">', teams[4], '</text>'); 
+        parts[15] = string.concat('<text x="10" y="201">', teams[5], '</text>');
+        parts[16] = string.concat('<text x="10" y="237">', teams[6], '</text>');
+        parts[17] = string.concat('<text x="10" y="261">', teams[7], '</text>'); 
 
         // 2nd Round
         // Game 0 Winner
-        parts[18] = string.concat('<rect x="210" y="68" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[0], 0), '"/>');
+        parts[18] = getRectangle(210, 68, getFillColor(bracket.games[0], 0));
         parts[19] = string.concat('<text x="215" y="86">', teams[bracket.games[0]], '</text>');
         
         // Game 1 Winner
-        parts[20] = string.concat('<rect x="210" y="92" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[1], 1), '"/>');
+        parts[20] = getRectangle(210, 92, getFillColor(bracket.games[1], 1));
         parts[21] = string.concat('<text x="215" y="110">', teams[bracket.games[1]], '</text>'); 
 
         // Game 2 Winner
-        parts[22] = string.concat('<rect x="210" y="188" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[2], 2), '"/>');
+        parts[22] = getRectangle(210, 188, getFillColor(bracket.games[2], 2));
         parts[23] = string.concat('<text x="215" y="206">', teams[bracket.games[2]], '</text>'); 
 
         // Game 3 Winner
-        parts[24] = string.concat('<rect x="210" y="212" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[3], 3), '"/>');
+        parts[24] = getRectangle(210, 212, getFillColor(bracket.games[3], 3));
         parts[25] = string.concat('<text x="215" y="230">', teams[bracket.games[3]], '</text>'); 
 
         parts[26] = '<path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>';
@@ -224,19 +229,18 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         // 3rd Round
         // Game 4 Winner
-        //parts[30] = '<rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>';
-        parts[30] = string.concat('<rect x="415" y="130" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[4], 4), '"/>');
+        parts[30] = getRectangle(415, 130, getFillColor(bracket.games[4], 4));
         parts[31] = string.concat('<text x="420" y="148">', teams[bracket.games[4]], '</text>');
         
         // Game 5 Winner
-        parts[32] = string.concat('<rect x="415" y="154" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[5], 5), '"/>');
+        parts[32] = getRectangle(415, 154, getFillColor(bracket.games[5], 5));
         parts[33] = string.concat('<text x="420" y="172">', teams[bracket.games[5]], '</text>');
         
         parts[34] = '<path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
         parts[35] = '<path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>';
 
         // Game 6 Winner
-        parts[36] = string.concat('<rect x="630" y="142" width="140" height="24" stroke="black" fill="', getFillColor(bracket.games[6], 6), '"/>');
+        parts[36] = getRectangle(630, 142, getFillColor(bracket.games[6], 6));
         parts[37] = string.concat('<text x="635" y="160">', teams[bracket.games[6]], '</text>'); // Oregon (Final)
         
         parts[38] = '<line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/>';
@@ -253,6 +257,11 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         return output;
     }
+
+    function getRectangle(uint x, uint y, string memory fill) internal pure returns (string memory) {
+        return string(abi.encodePacked('<rect x="', x.toString(), '" y="', y.toString(), '" width="140" height="24" stroke="black" fill="', fill, '"/>'));
+    }
+
 
     function toString(uint256 value) internal pure returns (string memory) {
     // Inspired by OraclizeAPI's implementation - MIT license
