@@ -55,10 +55,10 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
     uint256[7] private winners;
     uint256 private constant NULL = type(uint256).max;
-    //uint256 public mintFee = 0 ether;
+    uint256 public mintFee = 0.01 ether;
 
     function mintBracket(uint8[7] calldata games) external nonReentrant payable {
-        //require(msg.value >= mintFee, "Insufficient payment"); // Check if the caller sent enough ether
+        require(msg.value >= mintFee, "Insufficient payment"); // Check if the caller sent enough ether
         require(pauseMinting == false, "Minting is currently paused");
         //require(block.timestamp < mintDeadline, "Minting period has ended");
         require(totalSupply < maxSupply, "Max supply reached");
@@ -75,6 +75,32 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         payable(owner()).transfer(address(this).balance);
     }
 
+    function withdrawWinnings(uint256 tokenId) external {
+        uint256 score = getScore(tokenId);
+        if (score == highestScore && tokenBrackets[tokenId].hasClaimed == false) {
+            uint256 amountToSend = address(this).balance / winningBracketCount;
+            address owner = ownerOf(tokenId);
+            payable(owner).transfer(amountToSend);
+            tokenBrackets[tokenId].hasClaimed = true;
+        }
+    }
+
+/*
+    function withdrawWinnings() external {
+        // can caller withdraw?
+        uint256 tokenCount = balanceOf(msg.sender);
+        require(tokenCount > 0, "Caller does not own any tokens");
+        for (uint256 i = 0; i < tokenCount; i++) {
+            uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            // Your logic here for each tokenId
+        }
+
+        uint256 contractBalance = address(this).balance;
+        uint256 amountToSend = contractBalance / 2;
+        payable(msg.sender).transfer(amountToSend);
+    }
+*/
+  
     function validateBracket(uint8[7] calldata games) internal pure {
         // First Round
         require(games[0] == 0 || games[0] == 1, "Invalid winner for game 1");
