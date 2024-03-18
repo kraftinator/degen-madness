@@ -22,13 +22,25 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
     struct Brackets {
         uint8[7] games;
+        bool hasClaimed;
     }
 
     mapping(uint256 => Brackets) private tokenBrackets;
+
+    //struct WinningBracketsStruct {
+    //    uint256 tokenId;
+    //    bool hasClaimed;
+    //}
+
+    //mapping(uint256 => WinningBracketsStruct) public winningBrackets;
+
     bool public pauseMinting = false;
     uint256 public totalSupply = 0;
     uint256 public maxSupply = 5;
     uint256 public mintDeadline = 1710651600; // Midnight March 17, 2024 Central Daylight Time
+    
+    uint256 public highestScore = 0;
+    uint256 public winningBracketCount = 0;
 
     string[] private teams = [
         "Kansas",
@@ -43,12 +55,12 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
     uint256[7] private winners;
     uint256 private constant NULL = type(uint256).max;
-    uint256 public mintFee = 0.01 ether;
+    //uint256 public mintFee = 0 ether;
 
     function mintBracket(uint8[7] calldata games) external nonReentrant payable {
-        require(msg.value >= mintFee, "Insufficient payment"); // Check if the caller sent enough ether
+        //require(msg.value >= mintFee, "Insufficient payment"); // Check if the caller sent enough ether
         require(pauseMinting == false, "Minting is currently paused");
-        require(block.timestamp < mintDeadline, "Minting period has ended");
+        //require(block.timestamp < mintDeadline, "Minting period has ended");
         require(totalSupply < maxSupply, "Max supply reached");
         validateBracket(games);
 
@@ -56,7 +68,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         uint256 tokenId = totalSupply; // Use totalSupply as the new tokenId
 
         _safeMint(msg.sender, tokenId);
-        tokenBrackets[tokenId] = Brackets(games);
+        tokenBrackets[tokenId] = Brackets(games, false);
     }
 
     function withdrawMintFees() external onlyOwner {
@@ -91,7 +103,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     function setWinners(uint256[7] calldata newWinners) external onlyOwner {
         winners = newWinners;
     }
-
+/*
     function getWinners() public view returns (uint256[] memory) {
         uint256[] memory copyWinners = new uint256[](winners.length);
         for (uint256 i = 0; i < winners.length; i++) {
@@ -99,7 +111,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         }
         return copyWinners;
     }
-
+*/
     function getWinner(uint256 index) public view returns (uint256) {
         require(index < winners.length, "Index out of bounds.");
         return winners[index];
@@ -120,7 +132,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     function disableMinting() public onlyOwner {
         pauseMinting = true;
     }
-
+/*
     function getRankings() public view returns (uint256[] memory, uint256[] memory) {
         uint256[] memory tokenIds = new uint256[](totalSupply);
         uint256[] memory scores = new uint256[](totalSupply);
@@ -133,50 +145,9 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         return (tokenIds, scores);
     }
-/*
-    function getHighestScoreBracket() public view returns (uint256, uint256) {
-        require(totalSupply > 0, "No brackets minted yet");
-
-        uint256 highestScore = 0;
-        uint256 highestScoreTokenId;
-
-        for (uint256 i = 1; i <= totalSupply; i++) {
-            uint256 tokenId = i;
-            uint256 score = getScore(tokenId);
-            if (score > highestScore) {
-                highestScore = score;
-                highestScoreTokenId = tokenId;
-            }
-        }
-
-        return (highestScoreTokenId, highestScore);
-    }
-
-
-    function getHighestScoreBrackets() public view returns (uint256[] memory, uint256) {
-        require(totalSupply > 0, "No brackets minted yet");
-
-        uint256 highestScore = 0;
-        uint256[] memory highestScoreTokenIds;
-        uint256 count = 0;
-
-        for (uint256 i = 1; i <= totalSupply; i++) {
-            uint256 tokenId = i;
-            uint256 score = getScore(tokenId);
-            if (score > highestScore) {
-                highestScore = score;
-                delete highestScoreTokenIds;
-                highestScoreTokenIds = new uint256[](totalSupply); // Reset array
-                highestScoreTokenIds[count++] = tokenId;
-            } else if (score == highestScore) {
-                highestScoreTokenIds[count++] = tokenId;
-            }
-        }
-
-        return (highestScoreTokenIds, highestScore);
-    }
 */
 
+/*
     function getHighestScoreBrackets() public view returns (uint256[] memory, uint256) {
         require(totalSupply > 0, "No brackets minted yet");
 
@@ -204,6 +175,60 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
 
         return (trimmedTokenIds, highestScore);
     }
+*/
+/*
+    function getHighestScore() public view returns (uint256) {
+        uint256 highestScore = 0;
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score > highestScore) {
+                highestScore = score;
+            }
+        }
+        return highestScore;
+    }
+*/
+    function setHighestScore() external onlyOwner {
+        uint256 newHighScore = 0;
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score > newHighScore) {
+                newHighScore = score;
+            }
+        }
+        highestScore = newHighScore;
+    }
+
+    function setWinningBracketCount() external onlyOwner {
+        uint256 count = 0;
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score == highestScore) {
+                count++;
+            }
+        }
+        winningBracketCount = count;
+    }
+/*
+    function setWinningBrackets() external onlyOwner {
+        require(totalSupply > 0, "No brackets minted yet");
+
+        uint256 highestScore = getHighestScore();
+        uint256 count = 0;
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score == highestScore) {
+                winningBrackets[count++] = WinningBracketsStruct(tokenId, false);
+            }
+        }
+    
+    }
+*/
+
 
     function getScore(uint256 tokenId) public view returns (uint256) {
         Brackets storage bracket = tokenBrackets[tokenId];
