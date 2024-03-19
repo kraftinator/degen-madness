@@ -1,65 +1,632 @@
-<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">
-    <!-- Round 1 -->
-    <!-- Rectangles for Team Labels -->
-    <rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <!-- Reduced Spacing between Oregon and Iowa -->
-    <rect x="5" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="5" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <!-- Reduced Spacing between Florida and Gonzaga -->
-    <rect x="5" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="5" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <!-- Reduced Spacing between Portland St and Pittsburgh -->
-    <rect x="5" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="5" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>
+<svg width="2400" height="1100" xmlns="http://www.w3.org/2000/svg">
+  <!-- ********** EAST ********** -->
+  <!-- ***** ROUND 1 ***** -->
 
-    <!-- Team Labels -->
-    <text x="10" y="57" font-family="Arial" font-size="16">Kansas</text>
-    <text x="10" y="81" font-family="Arial" font-size="16">Oregon</text>
-    <text x="10" y="117" font-family="Arial" font-size="16">Iowa</text>
-    <text x="10" y="141" font-family="Arial" font-size="16">Florida</text>
-    <text x="10" y="177" font-family="Arial" font-size="16">Gonzaga</text>
-    <text x="10" y="201" font-family="Arial" font-size="16">Pittsburgh</text>
-    <text x="10" y="237" font-family="Arial" font-size="16">Portland St</text>
-    <text x="10" y="261" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Rectangles -->
+  <!-- Game 1 -->
+  <rect x="5" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 2 -->
+  <rect x="5" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 3 -->
+  <rect x="5" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 4 -->
+  <rect x="5" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 5 -->
+  <rect x="5" y="278" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="302" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 6 -->
+  <rect x="5" y="338" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="362" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 7 -->
+  <rect x="5" y="398" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="422" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 8 -->
+  <rect x="5" y="458" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="482" width="140" height="24" fill="lightgrey" stroke="black"/>
 
-    <!-- Round 2 -->
-    <!-- Rectangles for Round 1 Winners -->
-    <rect x="210" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <!-- Winners of Semifinals going to Final -->
-    <text x="215" y="86" font-family="Arial" font-size="16">Oregon</text>
-    <text x="215" y="110" font-family="Arial" font-size="16">Iowa</text>
-    
-    <!-- Additional Rectangles for Gonzaga and UCLA Winners -->
-    <rect x="210" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="210" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <!-- Winners of Round 1 going to Semifinals -->
-    <text x="215" y="206" font-family="Arial" font-size="16">Gonzaga</text>
-    <text x="215" y="230" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Team Labels -->
+  <!-- Game 1 -->
+  <text x="10" y="57" font-family="Arial" font-size="16">Kansas</text>
+  <text x="10" y="81" font-family="Arial" font-size="16">Oregon</text>
+  <!-- Game 2 -->
+  <text x="10" y="117" font-family="Arial" font-size="16">Iowa</text>
+  <text x="10" y="141" font-family="Arial" font-size="16">Florida</text>
+  <!-- Game 3 -->
+  <text x="10" y="177" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="10" y="201" font-family="Arial" font-size="16">Pittsburgh</text>
+  <!-- Game 4 -->
+  <text x="10" y="237" font-family="Arial" font-size="16">Portland St</text>
+  <text x="10" y="261" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 5 -->
+  <text x="10" y="297" font-family="Arial" font-size="16">Team9</text>
+  <text x="10" y="321" font-family="Arial" font-size="16">Team10</text>
+  <!-- Game 6 -->
+  <text x="10" y="357" font-family="Arial" font-size="16">Team11</text>
+  <text x="10" y="381" font-family="Arial" font-size="16">Team12</text>
+  <!-- Game 7 -->
+  <text x="10" y="417" font-family="Arial" font-size="16">Team13</text>
+  <text x="10" y="441" font-family="Arial" font-size="16">Team14</text>
+  <!-- Game 8 -->
+  <text x="10" y="477" font-family="Arial" font-size="16">Team15</text>
+  <text x="10" y="501" font-family="Arial" font-size="16">Team16</text>
 
-    <!-- Paths for Semifinals to Winners -->
-    <path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>
-    <path d="M 145,122 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>
-    <!-- Additional Paths for Gonzaga and UCLA to Winners -->
-    <path d="M 145,182 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>
-    <path d="M 145,242 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <!-- ***** ROUND 2 ***** -->
 
-    <!-- Round 3 -->
-    <!-- Rectangles for Round 2 Winners, adjusted for vertical centering -->
-    <rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>
-    <rect x="415" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Rectangles -->
+  <!-- Game 33 -->
+  <rect x="210" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 34 -->
+  <rect x="210" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 35 -->
+  <rect x="210" y="308" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="332" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 36 -->
+  <rect x="210" y="428" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="452" width="140" height="24" fill="lightgrey" stroke="black"/>
 
-    <!-- Winners of Round 3 -->
-    <text x="420" y="148" font-family="Arial" font-size="16">Oregon</text>
-    <text x="420" y="172" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Team Labels -->
+  <!-- Game 33 -->
+  <text x="215" y="86" font-family="Arial" font-size="16">Oregon</text>
+  <text x="215" y="110" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 34 -->
+  <text x="215" y="206" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="215" y="230" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 35 -->
+  <text x="215" y="326" font-family="Arial" font-size="16">Oregon</text>
+  <text x="215" y="350" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 36 -->
+  <text x="215" y="446" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="215" y="470" font-family="Arial" font-size="16">UCLA</text>
 
-    <path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>
-    <path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Lines -->
+  <!-- Game 33 -->
+  <path d="M 145,62 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,122 H 175 V 92 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 34 -->
+  <path d="M 145,182 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,242 H 175 V 212 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 35 -->
+  <path d="M 145,302 H 175 V 332 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,362 H 175 V 332 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 36 -->
+  <path d="M 145,422 H 175 V 452 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,482 H 175 V 452 H 209" stroke="black" stroke-width="2" fill="none"/>
 
-  <rect x="630" y="142" width="140" height="24" fill="lightgrey" stroke="black"/>
-  <text x="635" y="160" font-family="Arial" font-size="16">Oregon</text>
-  <line x1="555" y1="154" x2="630" y2="154" stroke="black" stroke-width="2"/>
+  <!-- ***** ROUND 3 ***** -->
+  
+  <!-- Rectangles -->
+  <!-- Game 49 -->
+  <rect x="415" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="415" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 50 -->
+  <rect x="415" y="370" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="415" y="394" width="140" height="24" fill="lightgrey" stroke="black"/>
 
+  <!-- Team Lables -->
+  <!-- Game 49 -->
+  <text x="420" y="148" font-family="Arial" font-size="16">Oregon</text>
+  <text x="420" y="172" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 50 -->
+  <text x="420" y="388" font-family="Arial" font-size="16">Oregon</text>
+  <text x="420" y="412" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 49 -->
+  <path d="M 350,92 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 350,212 H 380 V 154 H 415" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 50 -->
+  <path d="M 350,332 H 380 V 394 H 415" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 350,452 H 380 V 394 H 415" stroke="black" stroke-width="2" fill="none"/>
+  
+  <!-- ***** ROUND 4 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 57 -->
+  <rect x="630" y="248" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="630" y="272" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 57 -->
+  <text x="635" y="266" font-family="Arial" font-size="16">Oregon</text>
+  <text x="635" y="290" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 57 -->
+  <path d="M 555,154 H 585 V 272 H 630" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 555,394 H 585 V 272 H 630" stroke="black" stroke-width="2" fill="none"/>
+
+  <!-- ********** WEST ********** -->
+  <!-- ***** ROUND 1 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 9 -->
+  <rect x="5" y="534" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="558" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 10 -->
+  <rect x="5" y="594" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="618" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 11 -->
+  <rect x="5" y="654" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="678" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 12 -->
+  <rect x="5" y="714" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="738" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 13 -->
+  <rect x="5" y="774" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="798" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 14 -->
+  <rect x="5" y="834" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="858" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 15 -->
+  <rect x="5" y="894" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="918" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 16 -->
+  <rect x="5" y="954" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="5" y="978" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 9 -->
+  <text x="10" y="553" font-family="Arial" font-size="16">Kansas</text>
+  <text x="10" y="577" font-family="Arial" font-size="16">Oregon</text>
+  <!-- Game 10 -->
+  <text x="10" y="613" font-family="Arial" font-size="16">Iowa</text>
+  <text x="10" y="637" font-family="Arial" font-size="16">Florida</text>
+  <!-- Game 11 -->
+  <text x="10" y="673" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="10" y="697" font-family="Arial" font-size="16">Pittsburgh</text>
+  <!-- Game 12 -->
+  <text x="10" y="733" font-family="Arial" font-size="16">Portland St</text>
+  <text x="10" y="757" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 13 -->
+  <text x="10" y="793" font-family="Arial" font-size="16">Team9</text>
+  <text x="10" y="817" font-family="Arial" font-size="16">Team10</text>
+  <!-- Game 14 -->
+  <text x="10" y="853" font-family="Arial" font-size="16">Team11</text>
+  <text x="10" y="877" font-family="Arial" font-size="16">Team12</text>
+  <!-- Game 15 -->
+  <text x="10" y="913" font-family="Arial" font-size="16">Team13</text>
+  <text x="10" y="937" font-family="Arial" font-size="16">Team14</text>
+  <!-- Game 16 -->
+  <text x="10" y="973" font-family="Arial" font-size="16">Team15</text>
+  <text x="10" y="997" font-family="Arial" font-size="16">Team16</text>
+
+
+  <!-- ***** ROUND 2 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 37 -->
+  <rect x="210" y="564" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="588" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 38 -->
+  <rect x="210" y="684" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="708" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 39 -->
+  <rect x="210" y="804" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="828" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 40 -->
+  <rect x="210" y="924" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="210" y="948" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 37 -->
+  <text x="215" y="582" font-family="Arial" font-size="16">Oregon</text>
+  <text x="215" y="606" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 38 -->
+  <text x="215" y="702" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="215" y="726" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 39 -->
+  <text x="215" y="822" font-family="Arial" font-size="16">Oregon</text>
+  <text x="215" y="846" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 40 -->
+  <text x="215" y="942" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="215" y="966" font-family="Arial" font-size="16">UCLA</text>
+
+
+  <!-- Lines -->
+  <!-- Game 37 -->
+  <path d="M 145,558 H 175 V 588 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,618 H 175 V 588 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 38 -->
+  <path d="M 145,678 H 175 V 708 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,738 H 175 V 708 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 39 -->
+  <path d="M 145,798 H 175 V 828 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,858 H 175 V 828 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 40 -->
+  <path d="M 145,918 H 175 V 948 H 209" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 145,978 H 175 V 948 H 209" stroke="black" stroke-width="2" fill="none"/>
+
+  <!-- ***** ROUND 3 ***** -->
+  
+  <!-- Rectangles -->
+  <!-- Game 51 -->
+  <rect x="415" y="626" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="415" y="650" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 52 -->
+  <rect x="415" y="866" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="415" y="890" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Lables -->
+  <!-- Game 51 -->
+  <text x="420" y="644" font-family="Arial" font-size="16">Oregon</text>
+  <text x="420" y="668" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 52 -->
+  <text x="420" y="884" font-family="Arial" font-size="16">Oregon</text>
+  <text x="420" y="908" font-family="Arial" font-size="16">UCLA</text>
+
+
+  <!-- Lines -->
+  <!-- Game 51 -->
+  <path d="M 350,588 H 380 V 650 H 415" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 350,708 H 380 V 650 H 415" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 52 -->
+  <path d="M 350,828 H 380 V 890 H 415" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 350,948 H 380 V 890 H 415" stroke="black" stroke-width="2" fill="none"/>
+
+  <!-- ***** ROUND 4 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 58 -->
+  <rect x="630" y="744" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="630" y="768" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 58 -->
+  <text x="635" y="762" font-family="Arial" font-size="16">Oregon</text>
+  <text x="635" y="786" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 58 -->
+  <path d="M 555,650 H 585 V 768 H 630" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 555,890 H 585 V 768 H 630" stroke="black" stroke-width="2" fill="none"/>
+
+  <!-- ********** NORTH ********** -->
+
+ <!-- ***** ROUND 1 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 1 -->
+<!-- Game 1 -->
+<rect x="2135" y="38" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="62" width="140" height="24" fill="lightgrey" stroke="black"/>
+<!-- Game 2 -->
+<rect x="2135" y="98" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="122" width="140" height="24" fill="lightgrey" stroke="black"/>
+<!-- Game 3 -->
+<rect x="2135" y="158" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="182" width="140" height="24" fill="lightgrey" stroke="black"/>
+<!-- Game 4 -->
+<rect x="2135" y="218" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="242" width="140" height="24" fill="lightgrey" stroke="black"/>
+<!-- Game 5 -->
+<rect x="2135" y="278" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="302" width="140" height="24" fill="lightgrey" stroke="black"/>
+<!-- Game 6 -->
+<rect x="2135" y="338" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="362" width="140" height="24" fill="lightgrey" stroke="black"/>
+<!-- Game 7 -->
+<rect x="2135" y="398" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="422" width="140" height="24" fill="lightgrey" stroke="black"/>
+<!-- Game 8 -->
+<rect x="2135" y="458" width="140" height="24" fill="lightgrey" stroke="black"/>
+<rect x="2135" y="482" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+
+  <!-- Team Labels -->
+  <!-- Game 1 -->
+<!-- Game 1 -->
+<text x="2140" y="57" font-family="Arial" font-size="16">Kansas</text>
+<text x="2140" y="81" font-family="Arial" font-size="16">Oregon</text>
+<!-- Game 2 -->
+<text x="2140" y="117" font-family="Arial" font-size="16">Iowa</text>
+<text x="2140" y="141" font-family="Arial" font-size="16">Florida</text>
+<!-- Game 3 -->
+<text x="2140" y="177" font-family="Arial" font-size="16">Gonzaga</text>
+<text x="2140" y="201" font-family="Arial" font-size="16">Pittsburgh</text>
+<!-- Game 4 -->
+<text x="2140" y="237" font-family="Arial" font-size="16">Portland St</text>
+<text x="2140" y="261" font-family="Arial" font-size="16">UCLA</text>
+<!-- Game 5 -->
+<text x="2140" y="297" font-family="Arial" font-size="16">Team9</text>
+<text x="2140" y="321" font-family="Arial" font-size="16">Team10</text>
+<!-- Game 6 -->
+<text x="2140" y="357" font-family="Arial" font-size="16">Team11</text>
+<text x="2140" y="381" font-family="Arial" font-size="16">Team12</text>
+<!-- Game 7 -->
+<text x="2140" y="417" font-family="Arial" font-size="16">Team13</text>
+<text x="2140" y="441" font-family="Arial" font-size="16">Team14</text>
+<!-- Game 8 -->
+<text x="2140" y="477" font-family="Arial" font-size="16">Team15</text>
+<text x="2140" y="501" font-family="Arial" font-size="16">Team16</text>
+
+
+  <!-- ***** ROUND 2 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 33 -->
+  <rect x="1920" y="68" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="92" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 34 -->
+  <rect x="1920" y="188" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="212" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 35 -->
+  <rect x="1920" y="308" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="332" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 36 -->
+  <rect x="1920" y="428" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="452" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 33 -->
+  <text x="1925" y="86" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1925" y="110" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 34 -->
+  <text x="1925" y="206" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="1925" y="230" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 35 -->
+  <text x="1925" y="326" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1925" y="350" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 36 -->
+  <text x="1925" y="446" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="1925" y="470" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 33 -->
+  <path d="M 2135,62 H 2105 V 92 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,122 H 2105 V 92 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 34 -->
+  <path d="M 2135,182 H 2105 V 212 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,242 H 2105 V 212 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 35 -->
+  <path d="M 2135,302 H 2105 V 332 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,362 H 2105 V 332 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 36 -->
+  <path d="M 2135,422 H 2105 V 452 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,482 H 2105 V 452 H 2060" stroke="black" stroke-width="2" fill="none"/>
+
+
+  <!-- ***** ROUND 3 ***** -->
+  
+  <!-- Rectangles -->
+  <!-- Game 49 -->
+  <rect x="1705" y="130" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1705" y="154" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 50 -->
+  <rect x="1705" y="370" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1705" y="394" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Lables -->
+  <!-- Game 49 -->
+  <text x="1710" y="148" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1710" y="172" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 50 -->
+  <text x="1710" y="388" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1710" y="412" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 49 -->
+  <path d="M 1925,92 H 1895 V 154 H 1846" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 1925,212 H 1895 V 154 H 1846" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 50 -->
+  <path d="M 1925,332 H 1895 V 394 H 1846" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 1925,452 H 1895 V 394 H 1846" stroke="black" stroke-width="2" fill="none"/>
+  
+  <!-- ***** ROUND 4 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 59 -->
+  <rect x="1490" y="248" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1490" y="272" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 59 -->
+  <text x="1495" y="266" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1495" y="290" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 59 -->
+  <path d="M 1710,154 H 1680 V 272 H 1630" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 1710,394 H 1680 V 272 H 1630" stroke="black" stroke-width="2" fill="none"/>
+
+
+
+  <!-- ********** MIDWEST ********** -->
+
+  <!-- ***** ROUND 1 ***** -->
+
+  <rect x="2135" y="534" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="558" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 2 -->
+  <rect x="2135" y="594" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="618" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 3 -->
+  <rect x="2135" y="654" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="678" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 4 -->
+  <rect x="2135" y="714" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="738" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 5 -->
+  <rect x="2135" y="774" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="798" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 6 -->
+  <rect x="2135" y="834" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="858" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 7 -->
+  <rect x="2135" y="894" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="918" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 8 -->
+  <rect x="2135" y="954" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="2135" y="978" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 1 -->
+  <text x="2140" y="553" font-family="Arial" font-size="16">Kansas</text>
+  <text x="2140" y="577" font-family="Arial" font-size="16">Oregon</text>
+  <!-- Game 2 -->
+  <text x="2140" y="613" font-family="Arial" font-size="16">Iowa</text>
+  <text x="2140" y="637" font-family="Arial" font-size="16">Florida</text>
+  <!-- Game 3 -->
+  <text x="2140" y="673" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="2140" y="697" font-family="Arial" font-size="16">Pittsburgh</text>
+  <!-- Game 4 -->
+  <text x="2140" y="733" font-family="Arial" font-size="16">Portland St</text>
+  <text x="2140" y="757" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 5 -->
+  <text x="2140" y="793" font-family="Arial" font-size="16">Team9</text>
+  <text x="2140" y="817" font-family="Arial" font-size="16">Team10</text>
+  <!-- Game 6 -->
+  <text x="2140" y="853" font-family="Arial" font-size="16">Team11</text>
+  <text x="2140" y="877" font-family="Arial" font-size="16">Team12</text>
+  <!-- Game 7 -->
+  <text x="2140" y="913" font-family="Arial" font-size="16">Team13</text>
+  <text x="2140" y="937" font-family="Arial" font-size="16">Team14</text>
+  <!-- Game 8 -->
+  <text x="2140" y="973" font-family="Arial" font-size="16">Team15</text>
+  <text x="2140" y="997" font-family="Arial" font-size="16">Team16</text>
+
+  <!-- ***** ROUND 2 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 33 -->
+  <rect x="1920" y="564" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="588" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 34 -->
+  <rect x="1920" y="684" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="708" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 35 -->
+  <rect x="1920" y="804" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="828" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 36 -->
+  <rect x="1920" y="924" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1920" y="948" width="140" height="24" fill="lightgrey" stroke="black"/>
+  
+  <!-- Team Labels -->
+  <!-- Game 33 -->
+  <text x="1925" y="582" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1925" y="606" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 34 -->
+  <text x="1925" y="702" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="1925" y="726" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 35 -->
+  <text x="1925" y="822" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1925" y="846" font-family="Arial" font-size="16">Iowa</text>
+  <!-- Game 36 -->
+  <text x="1925" y="942" font-family="Arial" font-size="16">Gonzaga</text>
+  <text x="1925" y="966" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 33 -->
+  <path d="M 2135,558 H 2105 V 588 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,618 H 2105 V 588 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 34 -->
+  <path d="M 2135,678 H 2105 V 708 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,738 H 2105 V 708 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 35 -->
+  <path d="M 2135,798 H 2105 V 828 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,858 H 2105 V 828 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 36 -->
+  <path d="M 2135,918 H 2105 V 948 H 2060" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 2135,978 H 2105 V 948 H 2060" stroke="black" stroke-width="2" fill="none"/>
+
+
+  <!-- ***** ROUND 3 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 49 -->
+  <rect x="1705" y="626" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1705" y="650" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <!-- Game 50 -->
+  <rect x="1705" y="866" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1705" y="890" width="140" height="24" fill="lightgrey" stroke="black"/>
+  
+  <!-- Team Labels -->
+  <!-- Game 49 -->
+  <text x="1710" y="644" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1710" y="668" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 50 -->
+  <text x="1710" y="884" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1710" y="908" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <!-- Game 49 -->
+  <path d="M 1925,588 H 1895 V 650 H 1846" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 1925,708 H 1895 V 650 H 1846" stroke="black" stroke-width="2" fill="none"/>
+  <!-- Game 50 -->
+  <path d="M 1925,828 H 1895 V 890 H 1846" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 1925,948 H 1895 V 890 H 1846" stroke="black" stroke-width="2" fill="none"/>
+
+
+
+  <!-- ***** ROUND 4 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 60 -->
+  <rect x="1490" y="744" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1490" y="768" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 59 -->
+  <text x="1495" y="762" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1495" y="786" font-family="Arial" font-size="16">UCLA</text>
+
+
+  <!-- Lines -->
+  <!-- Game 60 -->
+  <path d="M 1710,650 H 1680 V 768 H 1630" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 1710,890 H 1680 V 768 H 1630" stroke="black" stroke-width="2" fill="none"/>
+
+  <!-- ********** FINAL FOUR ********** -->
+  
+  <!-- ***** ROUND 5 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 61 -->
+  <rect x="845" y="490" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="845" y="514" width="140" height="24" fill="lightgrey" stroke="black"/>
+    <!-- Game 62 -->
+  <rect x="1275" y="490" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1275" y="514" width="140" height="24" fill="lightgrey" stroke="black"/>
+  
+  <!-- Team Labels -->
+  <!-- Game 61 -->
+  <text x="850" y="508" font-family="Arial" font-size="16">Oregon</text>
+  <text x="850" y="532" font-family="Arial" font-size="16">UCLA</text>
+  <!-- Game 62 -->
+  <text x="1280" y="508" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1280" y="532" font-family="Arial" font-size="16">UCLA</text>
+  
+  <!-- Lines -->
+  <!-- Game 61 -->
+  <path d="M 760,272 H 805 V 514 H 845" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 760,768 H 805 V 514 H 845" stroke="black" stroke-width="2" fill="none"/>
+
+  <path d="M 1495,272 H 1465 V 514 H 1416" stroke="black" stroke-width="2" fill="none"/>
+  <path d="M 1495,768 H 1465 V 514 H 1416" stroke="black" stroke-width="2" fill="none"/>
+
+
+  <!-- ********** CHAMPIONSHIP ********** -->
+  
+  <!-- ***** ROUND 6 ***** -->
+
+  <!-- Rectangles -->
+  <!-- Game 63 -->
+  <rect x="1060" y="490" width="140" height="24" fill="lightgrey" stroke="black"/>
+  <rect x="1060" y="514" width="140" height="24" fill="lightgrey" stroke="black"/>
+
+  <!-- Team Labels -->
+  <!-- Game 63 -->
+  <text x="1065" y="508" font-family="Arial" font-size="16">Oregon</text>
+  <text x="1065" y="532" font-family="Arial" font-size="16">UCLA</text>
+
+  <!-- Lines -->
+  <line x1="986" y1="514" x2="1280" y2="514" stroke="black" stroke-width="2" />
+  
+
+  
 </svg>
-
