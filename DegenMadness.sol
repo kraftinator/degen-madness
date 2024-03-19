@@ -41,6 +41,7 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     
     uint256 public highestScore = 0;
     uint256 public winningBracketCount = 0;
+    uint256 public winningAmount = 0;
 
     string[] private teams = [
         "Kansas",
@@ -76,30 +77,15 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
     }
 
     function withdrawWinnings(uint256 tokenId) external {
+        require(tokenId <= totalSupply, "Invalid tokenId");
         uint256 score = getScore(tokenId);
-        if (score == highestScore && tokenBrackets[tokenId].hasClaimed == false) {
-            uint256 amountToSend = address(this).balance / winningBracketCount;
-            address owner = ownerOf(tokenId);
-            payable(owner).transfer(amountToSend);
-            tokenBrackets[tokenId].hasClaimed = true;
-        }
-    }
+        require(score == highestScore && tokenBrackets[tokenId].hasClaimed == false, "Token not eligible to withdraw winnings");
 
-/*
-    function withdrawWinnings() external {
-        // can caller withdraw?
-        uint256 tokenCount = balanceOf(msg.sender);
-        require(tokenCount > 0, "Caller does not own any tokens");
-        for (uint256 i = 0; i < tokenCount; i++) {
-            uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
-            // Your logic here for each tokenId
-        }
-
-        uint256 contractBalance = address(this).balance;
-        uint256 amountToSend = contractBalance / 2;
-        payable(msg.sender).transfer(amountToSend);
+        //uint256 amountToSend = address(this).balance / winningBracketCount;
+        address owner = ownerOf(tokenId);
+        payable(owner).transfer(winningAmount);
+        tokenBrackets[tokenId].hasClaimed = true;
     }
-*/
   
     function validateBracket(uint8[7] calldata games) internal pure {
         // First Round
@@ -215,6 +201,25 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         return highestScore;
     }
 */
+
+    function processBracketWinners() external onlyOwner {
+        uint256 newHighScore = 0;
+        uint256 count = 0;
+        for (uint256 i = 1; i <= totalSupply; i++) {
+            uint256 tokenId = i;
+            uint256 score = getScore(tokenId);
+            if (score > newHighScore) {
+                newHighScore = score;
+                count = 1;
+            } else if (score == newHighScore) {
+                count++;
+            }
+        }
+        highestScore = newHighScore;
+        winningBracketCount = count;
+        winningAmount = address(this).balance / count;
+    }
+/*
     function setHighestScore() external onlyOwner {
         uint256 newHighScore = 0;
         for (uint256 i = 1; i <= totalSupply; i++) {
@@ -238,6 +243,8 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         }
         winningBracketCount = count;
     }
+*/
+
 /*
     function setWinningBrackets() external onlyOwner {
         require(totalSupply > 0, "No brackets minted yet");
@@ -318,6 +325,8 @@ contract DegenMadness is ERC721, ReentrancyGuard, Ownable {
         parts[7] = getRectangle(5, 182, "lightgrey");
         parts[8] = getRectangle(5, 218, "lightgrey");
         parts[9] = getRectangle(5, 242, "lightgrey");
+
+        
 
         parts[10] = string.concat('<text x="10" y="57">', teams[0], '</text>'); 
         parts[11] = string.concat('<text x="10" y="81">', teams[1], '</text>'); 
